@@ -4,7 +4,7 @@ Hey there, fellow coders and cloud enthusiasts! 👋
 Welcome to my little corner of the GitHub universe where Docker images meet the magic of Google Kubernetes Engine (GKE)! This project showcases a responsive tour & travel agency website built with HTML, CSS, and JavaScript, all packaged into a neat Docker container and deployed on a GKE cluster. It's all about creating an awesome travel experience—from code to cloud! ☁️💻
 
 
-What's the Buzz? 🐝
+# What's the Buzz? 🐝
 This repository contains all the essential ingredients for building, deploying, and running the Europe-Travel-Website on GKE. Think of it as a recipe for cloud-powered travel adventures! You'll find:
 
 The website’s HTML, CSS, and JavaScript files
@@ -13,7 +13,7 @@ Kubernetes configuration files (YAML goodness!)
 Handy scripts to build, push, and deploy the project
 
 
-Project Structure 📂
+## Project Structure 📂
 Europe-Travel-Website/
 ├── Dockerfile              # The blueprint for the Docker image 🚀
 ├── kubernetes/             # Kubernetes config files for deployment
