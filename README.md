@@ -1,4 +1,4 @@
-# 🐳 Dockerized Dreams on GKE ✨ - Europe-Travel-Website
+# 🐳 Europe-Travel-Website ✨ 
 
 Hey there, fellow coders and cloud enthusiasts! 👋 Welcome to my little corner of the GitHub universe where Docker images meet the magic of Google Kubernetes Engine (GKE)! This project showcases a responsive tour & travel agency website design built with HTML, CSS, and JavaScript, packaged into a neat Docker container and deployed on a GKE cluster.  It's all about creating an awesome travel experience, from code to cloud!
 
