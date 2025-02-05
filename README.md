@@ -80,6 +80,8 @@ Contributions are always welcome! If you spot something that could be improved (
 
 [Choose a license - MIT, Apache 2.0, etc.]
 
+Happy coding and safe travels! 🌍✈️
+
 ## Authors 🎉
 
 [Wilber Gutiérrez, Rocío Vásquez, Verónica Guzmán, Evelyn Villeda, Dixi Figueroa].
