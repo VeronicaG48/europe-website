@@ -152,5 +152,6 @@ Happy coding and safe travels! 🌍✈️
 - Verónica Guzmán,
 - Evelyn Villeda,
 - Dixi Figueroa].
+- Jose Menendez
 
 ---
