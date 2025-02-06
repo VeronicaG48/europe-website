@@ -15,6 +15,7 @@ Handy scripts to build, push, and deploy the project
 
 ## Project Structure 📂
 
+```
 Europe-Travel-Website/
 ├── Dockerfile              # The blueprint for the Docker image 🚀
 ├── kubernetes/             # Kubernetes config files for deployment
@@ -32,6 +33,7 @@ Europe-Travel-Website/
     ├── js/                 # JavaScript files
     │   └── script.js
     └── ... other website files ...
+```
 
 
 ## Getting Started Deployment steps 🚀
@@ -47,8 +49,11 @@ cd Europe-Travel-Website-html-css-js
 ### Create a Dockerfile:
 
 FROM nginx:alpine
+
 COPY europe_travel /usr/share/nginx/html
+
 EXPOSE 80
+
 CMD ["nginx", "-g", "daemon off;"]
 
 
@@ -86,6 +91,7 @@ gcloud container clusters get-credentials europe-website-cluster --zone=us-centr
 
 ### Create a deployment.yaml file: use nano deployment.yaml
 
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -104,11 +110,12 @@ spec:
       - name: europe-website
         image: gcr.io/linuxvmtest-442314/europe-website
         ports:
-        - containerPort: 80
-
+        - containerPort: 80 
+```
 
 ### Create a service.yaml file: use nano service.yaml
 
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -121,6 +128,7 @@ spec:
   - protocol: TCP
     port: 80
     targetPort: 80
+```
 
 
 ### Apply the files:
