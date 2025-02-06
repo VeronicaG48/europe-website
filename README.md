@@ -155,7 +155,7 @@ make sure to have the correct access using token instead of password
 
 
 
-## Challenges, Recommendations and Triumphs 🐛✨💡
+## Recommendations 🐛✨💡
 - The folder name needs to be changed to "europe-travel" because cloud shell may not recognize folder names with spaces or capital letters.
 - Change the docker file to the proper folder name.
   
