@@ -1,5 +1,5 @@
 # 🐳 Europe-Travel-Website ✨
-Hey there, fellow coders and cloud enthusiasts! 👋
+Hey there! 👋
 
 Welcome to our GitHub repository! This project demonstrates the development and deployment of a responsive travel and tour agency website, built using HTML, CSS, and JavaScript. The website is containerized using Docker and deployed on a Google Kubernetes Engine (GKE) cluster, showcasing a seamless transition from local development to cloud deployment. This project exemplifies best practices in modern web development and cloud infrastructure, providing an efficient and scalable solution for showcasing travel experiences. ☁️💻
 
@@ -14,6 +14,7 @@ Handy scripts to build, push, and deploy the project
 
 
 ## Project Structure 📂
+
 Europe-Travel-Website/
 ├── Dockerfile              # The blueprint for the Docker image 🚀
 ├── kubernetes/             # Kubernetes config files for deployment
@@ -40,7 +41,8 @@ Let’s get started! Follow the steps below to set up and run the project:
 git clone https://github.com/GNiruthian/Europe-Travel-Website-html-css-js.git
 cd Europe-Travel-Website-html-css-js
 
-* IMPORTANT: Change the folder name to europe_travel
+- IMPORTANT: Change the folder name to europe_travel
+
 
 ### Create a Dockerfile:
 
@@ -52,28 +54,38 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ### Build the Docker image:
 docker build -t europe-website .
+
+
 ### Run Locally to Test:
 docker run -p 8080:80 europe-website
+
 
 ### Push to Google Container/Artifact Registry:
 Tag the image for Google Cloud:
 docker tag europe-website gcr.io/linuxvmtest-442314/europe-website
 
+
 ### Authenticate Docker with Google Cloud:
 gcloud auth configure-docker
 
+
 ### Push the image:
 docker push gcr.io/linuxvmtest-442314/europe-website
+
 
 ### Create a GKE cluster to host the website:
 gcloud container clusters create europe-website-cluster \
     --zone=us-central1-a \
     --machine-type=e2-micro \
     --num-nodes=3 \
+
+
 ### Get cluster's credentials
 gcloud container clusters get-credentials europe-website-cluster --zone=us-central1-a
 
+
 ### Create a deployment.yaml file: use nano deployment.yaml
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -93,6 +105,8 @@ spec:
         image: gcr.io/linuxvmtest-442314/europe-website
         ports:
         - containerPort: 80
+
+
 ### Create a service.yaml file: use nano service.yaml
 
 apiVersion: v1
@@ -108,13 +122,16 @@ spec:
     port: 80
     targetPort: 80
 
+
 ### Apply the files:
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 
+
 ### Verify the Load Balancer:
 * Get the external IP of the LoadBalancer:
 kubectl get service europe-website-service
+
 
 ### Finalize and Publish GitHub Repository
 
@@ -130,28 +147,27 @@ make sure to have the correct access using token instead of password
 
 
 
-## Challenges and Triumphs (aka Bugs and Features) 🐛✨
-- change the folder name to europe-travel due to sloud shell could coudln't recognize the folder name if there are spaces or caplocks
-- change the docker file to the proper folder name
+## Challenges, Recommendations and Triumphs 🐛✨💡
+- The folder name needs to be changed to "europe-travel" because cloud shell may not recognize folder names with spaces or capital letters.
+- Change the docker file to the proper folder name.
   
 
-
-Contributing 🤗
-Contributions are always welcome! If you spot something that could be improved (and trust me, there's always room for improvement!), feel free to open an issue or submit a pull request. Let's make this project even better together! 💪
+## Contributing 🤗
+If you spot something that could be improved, feel free to open an issue or submit a pull request 💪
 
 ## License 📜
 
 [Choose a license - MIT, Apache 2.0, etc.]
 
-Happy coding and safe travels! 🌍✈️
 
 ## Authors 🎉
 
-- Wilber Gutiérrez,
-- Rocío Vásquez,
-- Verónica Guzmán,
-- Evelyn Villeda,
-- Dixi Figueroa].
-- Jose Menendez
+- Wilber Gutiérrez
+- Rocío Vásquez
+- Verónica Guzmán
+- José Menéndez
+- Evelyn Villeda
+- Dixi Figueroa.
 
+Happy coding and safe travels! 🌍✈️
 ---
