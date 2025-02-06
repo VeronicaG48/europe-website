@@ -1,11 +1,11 @@
 # 🐳 Europe-Travel-Website ✨
 Hey there, fellow coders and cloud enthusiasts! 👋
 
-Welcome to my little corner of the GitHub universe where Docker images meet the magic of Google Kubernetes Engine (GKE)! This project showcases a responsive tour & travel agency website built with HTML, CSS, and JavaScript, all packaged into a neat Docker container and deployed on a GKE cluster. It's all about creating an awesome travel experience—from code to cloud! ☁️💻
+Welcome to our GitHub repository! This project demonstrates the development and deployment of a responsive travel and tour agency website, built using HTML, CSS, and JavaScript. The website is containerized using Docker and deployed on a Google Kubernetes Engine (GKE) cluster, showcasing a seamless transition from local development to cloud deployment. This project exemplifies best practices in modern web development and cloud infrastructure, providing an efficient and scalable solution for showcasing travel experiences. ☁️💻
 
 
-# What's the Buzz? 🐝
-This repository contains all the essential ingredients for building, deploying, and running the Europe-Travel-Website on GKE. Think of it as a recipe for cloud-powered travel adventures! You'll find:
+## What's the Buzz? 🐝
+This repository contains all the essential components for building, deploying, and running the Europe-Travel-Website on GKE. Think of it as a recipe for cloud-powered travel adventures! You'll find:
 
 The website’s HTML, CSS, and JavaScript files
 A Dockerfile to containerize the app
@@ -33,44 +33,107 @@ Europe-Travel-Website/
     └── ... other website files ...
 
 
-Getting Started 🚀
-Ready to embark on this coding adventure? Follow these steps to get the project up and running:
+## Getting Started Deployment steps 🚀
+Let’s get started! Follow the steps below to set up and run the project:
+
+### Clone the teaser website repository:
+git clone https://github.com/GNiruthian/Europe-Travel-Website-html-css-js.git
+cd Europe-Travel-Website-html-css-js
+
+* IMPORTANT: Change the folder name to europe_travel
+
+### Create a Dockerfile:
+
+FROM nginx:alpine
+COPY europe_travel /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
 
-Clone the Repo:
+### Build the Docker image:
+docker build -t europe-website .
+### Run Locally to Test:
+docker run -p 8080:80 europe-website
 
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+### Push to Google Container/Artifact Registry:
+Tag the image for Google Cloud:
+docker tag europe-website gcr.io/linuxvmtest-442314/europe-website
+
+### Authenticate Docker with Google Cloud:
+gcloud auth configure-docker
+
+### Push the image:
+docker push gcr.io/linuxvmtest-442314/europe-website
+
+### Create a GKE cluster to host the website:
+gcloud container clusters create europe-website-cluster \
+    --zone=us-central1-a \
+    --machine-type=e2-micro \
+    --num-nodes=3 \
+### Get cluster's credentials
+gcloud container clusters get-credentials europe-website-cluster --zone=us-central1-a
+
+### Create a deployment.yaml file: use nano deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: europe-website
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: europe-website
+  template:
+    metadata:
+      labels:
+        app: europe-website
+    spec:
+      containers:
+      - name: europe-website
+        image: gcr.io/linuxvmtest-442314/europe-website
+        ports:
+        - containerPort: 80
+### Create a service.yaml file: use nano service.yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: europe-website-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: europe-website
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+### Apply the files:
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+### Verify the Load Balancer:
+* Get the external IP of the LoadBalancer:
+kubectl get service europe-website-service
+
+### Finalize and Publish GitHub Repository
+
+* git init
+* git add .
+* git commit -m "Initial commit"
+  
+  - git config --global user.email "guzmanlaura@telsal.cloud"
+   - git config --global user.name "veronica guzman"
+* git remote add origin https://github.com/VeronicaG48/europe-website.git
+* git push -u origin main 
+make sure to have the correct access using token instead of password
 
 
-Build the Docker Image:
 
-./scripts/build.sh
-
-
-Push to a Container Registry:
-
-(This could be Artifact Registry, Docker Hub, etc.)
-
-./scripts/push.sh
-
-
-Deploy to GKE:
-
-./scripts/deploy.sh
-
-
-
-The Website Itself 🌐
-This website is designed to be responsive, adapting beautifully to different screen sizes—from desktops to mobile devices. It's built using standard web technologies:
-
-HTML: Provides the structure and content.
-CSS: Styles the site to be visually appealing.
-JavaScript: Adds interactivity and dynamic features.
-
-
-Challenges and Triumphs (aka Bugs and Features) 🐛✨
-Every journey has its bumps, and this project is no exception! I’ve faced some interesting challenges along the way (which you might notice in the code 😅), but I've also learned tons about Docker, Kubernetes, and cloud deployment. Stay tuned for more updates and improvements! 🔧📈
+## Challenges and Triumphs (aka Bugs and Features) 🐛✨
+- change the folder name to europe-travel due to sloud shell could coudln't recognize the folder name if there are spaces or caplocks
+- change the docker file to the proper folder name
+  
 
 
 Contributing 🤗
@@ -84,6 +147,10 @@ Happy coding and safe travels! 🌍✈️
 
 ## Authors 🎉
 
-[Wilber Gutiérrez, Rocío Vásquez, Verónica Guzmán, Evelyn Villeda, Dixi Figueroa].
+- Wilber Gutiérrez,
+- Rocío Vásquez,
+- Verónica Guzmán,
+- Evelyn Villeda,
+- Dixi Figueroa].
 
 ---
